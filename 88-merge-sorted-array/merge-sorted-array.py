@@ -3,28 +3,16 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        i,j,sid = 0,0,0
-        solu = [0] *(m+n)
-        while i < m and j < n:
-            
-            # i and j are pointers for both array and should not out of index so looping upto i,j<m,n
-            if nums1[i] < nums2[j]:
-                solu[sid] = nums1[i]
-                i += 1
-                sid  += 1
-            else:
-                solu[sid] = nums2[j]
-                j += 1
-                sid += 1
-            
-        while i < m:
-            solu[sid] = nums1[i]
-            i += 1
-            sid += 1
-        
-        while j < n:
-            solu[sid] = nums2[j]
-            j += 1
-            sid += 1
+        # Without usinf third variable
 
-        nums1[:] = solu 
+        i,j,sid = m-1,n-1,m+n-1
+
+        while j >= 0:
+            if i >= 0 and nums1[i] > nums2[j]:
+                nums1[sid] = nums1[i]
+                i -= 1
+            else:
+                nums1[sid] = nums2[j]
+                j -= 1
+            sid -= 1
+            
