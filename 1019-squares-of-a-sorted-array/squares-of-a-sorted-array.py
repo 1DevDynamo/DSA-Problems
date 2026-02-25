@@ -7,7 +7,7 @@ class Solution:
         pos = [i**2 for i in pos]
         neg = [i**2 for i in neg]
 
-        neg.sort()
+        neg = neg[::-1]
 
         m = len(pos)
         n = len(neg)
