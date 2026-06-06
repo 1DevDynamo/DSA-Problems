@@ -1,17 +1,18 @@
-# Brute force
+# Normal Optimal
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
 
-        z = []
-        o = []
-        t = []
+        z = 0
+        o = 0
+        t = 0
 
-        for num in nums:
-            if num == 0:
-                z.append(num)
-            elif num == 1:
-                o.append(num)
+        for i in nums:
+            if i == 0:
+                z += 1
+            elif i == 1:
+                o += 1
             else:
-                t.append(num)
+                t += 1
 
-        nums[:] = z + o + t
+
+        nums[:] = [0]*z + [1]*o + [2]*t
