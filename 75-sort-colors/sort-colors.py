@@ -1,18 +1,21 @@
-# Normal Optimal
+# 2pointer Optimal
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
 
-        z = 0
-        o = 0
-        t = 0
+        low = 0
+        high = len(nums)-1
+        mid = 0
 
-        for i in nums:
-            if i == 0:
-                z += 1
-            elif i == 1:
-                o += 1
+        while mid <= high:
+            if nums[mid] == 0:
+                nums[low], nums[mid] = nums[mid], nums[low]
+                low += 1
+                mid += 1
+            
+            elif nums[mid] == 1:
+                mid += 1
+            
             else:
-                t += 1
-
-
-        nums[:] = [0]*z + [1]*o + [2]*t
+                nums[high], nums[mid] = nums[mid], nums[high]
+                high -= 1
+    
