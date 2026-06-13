@@ -1,49 +1,24 @@
+# 2-pointer approach
+
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
-        
-        pos = [i for i in nums if i >= 0]
-        neg = [i for i in nums if i < 0]
 
-        m = len(pos)
-        n = len(neg)
+        n = len(nums)
+        left = 0
+        right = n-1
+        ans = n-1
+        solu = [0]*n
 
-        # no negative numbers
-        if n == 0:
-            pos = [i**2 for i in pos]
-            return pos
-        
-        # if no positive numbers
-        if m == 0:
-            neg = [i**2 for i in neg]
-            neg = neg[::-1]
-            return neg
+        for i in range(0,n):
+            l_sq = nums[left]*nums[left]
+            r_sq = nums[right]*nums[right]
 
-
-        pos = [i**2 for i in pos]
-        neg = [i**2 for i in neg]
-
-        neg = neg[::-1]
-        i,j,sid = 0,0,0
-        solu = [0] *(m+n)
-
-        while i<m and j<n:
-            
-            if pos[i] < neg[j]:
-                solu[sid] = pos[i]
-                sid += 1
-                i += 1
+            if r_sq > l_sq:
+                solu[ans] = r_sq
+                right-= 1
+                ans -= 1
             else:
-                solu[sid] = neg[j]
-                sid += 1
-                j += 1
-        while i < m:
-            solu[sid] = pos[i]
-            sid += 1
-            i += 1
-        
-        while j < n:
-            solu[sid] = neg[j]
-            sid += 1
-            j += 1
-        
+                solu[ans] = l_sq
+                left += 1
+                ans -= 1
         return solu
